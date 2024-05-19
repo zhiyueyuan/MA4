@@ -1,0 +1,30 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from time import perf_counter
+from concurrent.futures import ProcessPoolExecutor
+import math
+def mon(n,d):
+    points=[[np.random.uniform(-1,1) for i in range(d)] for _ in range(n)]
+    inside_point=lambda point:sum(x**2 for x in point)<=1
+    in_points=list(filter(inside_point,points))
+    vol=(2**d)*len(in_points)/n
+    ref=(math.pow(math.pi,d/2))/(math.gamma(d/2+1))
+    return vol,ref
+
+if __name__ == '__main__':
+    start=perf_counter()
+    mon(1000000,11)
+    mon(1000000,11)
+    stop=perf_counter()
+    print(f"Time is{stop-start} seconds")
+
+    start=perf_counter()
+    with ProcessPoolExecutor() as ex:
+        p1 = ex.submit(mon,1000000,11) # Starts first
+        p2 = ex.submit(mon,1000000,11) # Starts second
+        r1 = p1.result() # Program waits until p1 is complete before assigning r2
+        r2 = p2.result()
+    stop=perf_counter()
+    print(f"Time is{stop-start} seconds")
+
+
