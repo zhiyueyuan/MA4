@@ -1,0 +1,8 @@
+# Makefile for MA4
+all:
+	echo "Compiling person.cpp to person.o"
+# @ supresses the command from being printed to the terminal
+	@g++ -std=c++11 -c -fPIC person.cpp -o person.o
+	@g++ -std=c++11 -shared -o libperson.so  person.o	
+clean:
+	rm -fr *.o *.so __pycache__
