@@ -21,12 +21,12 @@ def fib_nu(n): # python code with Numba
 
 def main():
     f = Person(50)
-    print(f"Age: {f.getAge()}")
-    print(f"Decades alive: {f.getDecades()}")
+    print(f"Age: {f.get()}")
+   # print(f"Decades alive: {f.getDecades()}")
 
-    f.setAge(51)
-    print(f"Age: {f.getAge()}")
-    print(f"Decades alive: {f.getDecades()}")
+    f.set(51)
+    print(f"Age: {f.get()}")
+    #print(f"Decades alive: {f.getDecades()}")
 
     # Step 4-5 (see instructions MA4) of exercise 2.2.2
     y_py = []
